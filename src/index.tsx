@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
+import './index.scss';
 import reportWebVitals from './reportWebVitals';
+
+const CreateUser = React.lazy(() => import('./pages/create-user/create-user'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="p-grid p-justify-center p-align-center parent-container">
+      <Suspense fallback={''}>
+        <Router>
+          <Route exact path="/" component={CreateUser} />      
+        </Router>
+      </Suspense>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
